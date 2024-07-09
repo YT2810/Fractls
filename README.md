@@ -1,67 +1,132 @@
 
-# Fractls
+# Fractls DApp
 
-Fractls is a decentralized application for creating and trading fractionalized NFTs with a puzzle-like gaming interface. This project is developed as part of a bootcamp and is open source.
+## Overview
 
-## Getting Started
+Fractls is a decentralized application (DApp) for creating and managing fractionalized NFTs. The DApp allows artists to upload an image, set a price, and mint an original NFT along with 9 fractionalized NFTs. Users can buy and trade these fractional NFTs, and the owner of all 9 fractions can claim the original NFT.
 
-### Prerequisites
-- Node.js
-- MongoDB
-- Infura API key
+## Project Structure
 
-### Installation
+```
+Fractls/
+├── backend/
+│   ├── .env
+│   ├── hardhat.config.js
+│   ├── contracts/
+│   │   └── Fractls.sol
+│   ├── test/
+│   │   └── FractlsTest.js
+│   ├── scripts/
+│   │   └── deploy.js
+│   └── artifacts/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── config/
+│   │       ├── contractConfig.js
+│   │       └── pinataConfig.js
+│   ├── .env
+│   ├── package.json
+│   └── node_modules/
+├── .gitignore
+├── README.md
+└── .env (opcional)
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YT2810/Fractls.git
-   cd Fractls
-   ```
+## Prerequisites
 
-2. Install backend dependencies:
+- Node.js and npm: Install from [nodejs.org](https://nodejs.org/)
+- Infura or Alchemy API key
+- MetaMask extension for connecting to Ethereum
+
+## Setup
+
+### Backend
+
+1. **Install Dependencies:**
+
    ```bash
    cd backend
    npm install
    ```
 
-3. Set up environment variables:
-   Create a `.env` file in the root folder and add the following:
+2. **Configure Environment Variables:**
+
+   Create a `.env` file in the `backend` directory and add the following variables:
+
    ```plaintext
-   PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   NEXT_PUBLIC_INFURA_PROJECT_ID=your_infura_project_id
+   INFURA_PROJECT_ID=your_infura_project_id
    PRIVATE_KEY=your_wallet_private_key
    ```
 
-4. Initialize the frontend project:
+3. **Compile Contracts:**
+
+   ```bash
+   npx hardhat compile
+   ```
+
+4. **Deploy Contracts:**
+
+   ```bash
+   npx hardhat run scripts/deploy.js --network sepolia
+   ```
+
+5. **Update the Frontend with Contract Address:**
+
+   Add the deployed contract address to the `.env` file in the `frontend` directory:
+
+   ```plaintext
+   REACT_APP_CONTRACT_ADDRESS=deployed_contract_address
+   ```
+
+### Frontend
+
+1. **Install Dependencies:**
+
    ```bash
    cd frontend
-   npx create-next-app@latest .
+   npm install
    ```
-   - Select "no" for all options during the setup process.
 
-5. Install frontend dependencies:
+2. **Configure Environment Variables:**
+
+   Create a `.env` file in the `frontend` directory and add the following variables:
+
+   ```plaintext
+   REACT_APP_INFURA_PROJECT_ID=your_infura_project_id
+   REACT_APP_CONTRACT_ADDRESS=deployed_contract_address
+   ```
+
+3. **Run the Frontend:**
+
    ```bash
-   npm install web3
+   npm start
    ```
 
-### Usage
+## Usage
 
-1. Start the backend server:
-   ```bash
-   cd backend
-   node server.js
-   ```
+1. **Connect Wallet:**
 
-2. Start the frontend server:
-   ```bash
-   cd ../frontend
-   npm run dev
-   ```
+   Open the application in your browser and connect your MetaMask wallet.
+
+2. **Upload Image and Set Price:**
+
+   Use the form to upload an image and set the total price for the original and fractional NFTs.
+
+3. **Mint NFTs:**
+
+   Mint the original and fractional NFTs.
+
+4. **Trade and Claim NFTs:**
+
+   Trade fractional NFTs on the marketplace and claim the original NFT when you own all 9 fractions.
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+Feel free to fork this repository and make contributions. Pull requests are welcome.
 
 ## License
 
