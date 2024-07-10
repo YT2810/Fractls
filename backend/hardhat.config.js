@@ -13,7 +13,7 @@ module.exports = {
   },
   networks: {
     sepolia: {
-      url: `https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`,
+      url: `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
       accounts: [`0x${process.env.PRIVATE_KEY}`]
     }
   }

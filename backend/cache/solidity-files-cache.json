@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/tyme/Fractls/backend/contracts/Fractls.sol": {
-      "lastModificationDate": 1720547125662,
-      "contentHash": "ccde956b94dc8a5315bfb2815b203bac",
+      "lastModificationDate": 1720589585219,
+      "contentHash": "3fa3190932a28589a8ef149b00c9c358",
       "sourceName": "contracts/Fractls.sol",
       "solcConfig": {
         "version": "0.8.24",
@@ -34,7 +34,7 @@
         "@openzeppelin/contracts/access/Ownable.sol"
       ],
       "versionPragmas": [
-        "^0.8.0"
+        "^0.8.24"
       ],
       "artifacts": [
         "Fractls"

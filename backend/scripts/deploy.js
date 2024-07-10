@@ -1,5 +1,3 @@
-// scripts/deploy.js
-
 require("dotenv").config(); // Load environment variables from .env file
 const { ethers } = require("ethers");
 const fs = require("fs");
@@ -21,7 +19,7 @@ async function main() {
   const contractFactory = new ethers.ContractFactory(abi, bytecode, wallet);
   console.log("Deploying contract...");
 
-  const contract = await contractFactory.deploy();
+  const contract = await contractFactory.deploy(process.env.INTERMEDIARY_WALLET);
   await contract.deployed();
 
   // The contract is now deployed on the chain

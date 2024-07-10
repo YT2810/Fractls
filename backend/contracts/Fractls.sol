@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -13,9 +13,15 @@ contract Fractls is ERC721URIStorage, Ownable {
     mapping(uint256 => uint256) public originalToFractions;
     mapping(uint256 => bool) public fractionsMinted;
     uint256 public constant TOTAL_FRACTIONS = 9;
+    address public intermediaryWallet;
 
-    constructor() ERC721("Fractls", "FRACT") Ownable(msg.sender) {
+    /**
+     * @dev Constructor to set the intermediary wallet and initialize the contract
+     * @param _intermediaryWallet Address of the wallet that will hold the NFTs initially
+     */
+    constructor(address _intermediaryWallet) ERC721("Fractls", "FRACT") Ownable(_intermediaryWallet) {
         tokenCounter = 0;
+        intermediaryWallet = _intermediaryWallet;
     }
 
     /**
@@ -31,7 +37,7 @@ contract Fractls is ERC721URIStorage, Ownable {
 
         // Mint the original NFT
         uint256 newOriginalItemId = tokenCounter;
-        _safeMint(msg.sender, newOriginalItemId);
+        _safeMint(intermediaryWallet, newOriginalItemId);
         _setTokenURI(newOriginalItemId, originalTokenURI);
         newItemIds[0] = newOriginalItemId;
         tokenCounter++;
@@ -39,7 +45,7 @@ contract Fractls is ERC721URIStorage, Ownable {
         // Mint the fractional NFTs
         for (uint256 i = 0; i < TOTAL_FRACTIONS; i++) {
             uint256 newFractionItemId = tokenCounter;
-            _safeMint(msg.sender, newFractionItemId);
+            _safeMint(intermediaryWallet, newFractionItemId);
             _setTokenURI(newFractionItemId, fractionTokenURIs[i]);
             newItemIds[i + 1] = newFractionItemId;
             originalToFractions[newFractionItemId] = newOriginalItemId;
