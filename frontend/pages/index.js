@@ -1,28 +1,25 @@
-// frontend/pages/index.js
-import { useEffect, useState } from 'react';
-import Web3 from 'web3';
+import React from 'react';
+import ConnectWallet from '../components/ConnectWallet';
+import MintNFTs from '../components/MintNFTs';
+import Marketplace from '../components/Marketplace';
+import ClaimNFT from '../components/ClaimNFT';
+import BuySellComponent from '../components/BuySellComponent';
 
-const Home = () => {
-  const [account, setAccount] = useState(null);
-
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.request({ method: 'eth_requestAccounts' })
-        .then(accounts => setAccount(accounts[0]))
-        .catch(err => console.error(err));
-    }
-  }, []);
+const HomePage = () => {
+  const handleImageUpload = (imageURI) => {
+    console.log('Image uploaded:', imageURI);
+  };
 
   return (
     <div>
       <h1>Welcome to Fractls</h1>
-      {account ? (
-        <p>Connected with address: {account}</p>
-      ) : (
-        <p>Please connect your wallet</p>
-      )}
+      <ConnectWallet />
+      <MintNFTs />
+      <Marketplace />
+      <ClaimNFT />
+      <BuySellComponent />
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
